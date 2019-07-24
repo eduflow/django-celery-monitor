@@ -10,6 +10,7 @@ from django.conf import settings
 from django.db.models import DateTimeField, Func
 from django.utils import timezone
 from django.utils.html import escape
+from django.utils.safestring import mark_safe
 
 try:
     from django.db.models.functions import Now
@@ -79,11 +80,11 @@ def _attrs(**kwargs):
 
 
 def display_field(short_description, admin_order_field,
-                  allow_tags=True, **kwargs):
+                  **kwargs):
     """Set some display_field attributes."""
-    return _attrs(short_description=short_description,
+    return mark_safe(_attrs(short_description=short_description,
                   admin_order_field=admin_order_field,
-                  allow_tags=allow_tags, **kwargs)
+                  **kwargs))
 
 
 def action(short_description, **kwargs):
